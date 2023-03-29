@@ -8,11 +8,11 @@ https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf
 
 - `daily_dialog_vi.txt`: dịch từ [daily_dialog](https://huggingface.co/datasets/daily_dialog) bởi https://www.kaggle.com/datasets/iambestfeeder
 
-- `vi_gpt4all_reduced_*.jsonl`: dịch từ [gpt4all](https://github.com/nomic-ai/gpt4all), loại bớt và dịch bởi Tuộc và https://github.com/binhvq
+- `vi_gpt4all_reduced_*.jsonl`: ~173k dịch từ [gpt4all](https://github.com/nomic-ai/gpt4all), loại bớt và dịch bởi Tuộc và https://github.com/binhvq
 
-- `vi_alpaca_reduced.jsonl`: dịch từ [AlpacaDataCleaned](https://github.com/gururise/AlpacaDataCleaned), lược bớt và dịch bởi Tuộc và https://github.com/binhvq
+- `vi_alpaca_reduced.jsonl`: ~51k chỉ dẫn dịch từ [AlpacaDataCleaned](https://github.com/gururise/AlpacaDataCleaned), lược bớt và dịch bởi Tuộc và https://github.com/binhvq
 
-Để tạo một file huấn luyện chung dùng lệnh:
+Để tạo một file huấn luyện chung dùng lệnh (tổng 224k chỉ dẫn):
 ```sh
 cat *vi*.jsonl > vi_merged.jsonl
 ```

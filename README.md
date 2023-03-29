@@ -4,4 +4,4 @@
 
 - [daily dialog](https://huggingface.co/datasets/daily_dialog): dịch bởi https://www.kaggle.com/datasets/iambestfeeder
 
-- [gpt4all](https://github.com/nomic-ai/gpt4all): dịch bởi Tuộc và https://github.com/binhvq
+- [gpt4all](https://github.com/nomic-ai/gpt4all): lược bỏ và dịch bởi Tuộc và https://github.com/binhvq

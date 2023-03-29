@@ -14,7 +14,7 @@ https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf
 
 Để tạo một file huấn luyện chung dùng lệnh (__tổng 224k chỉ dẫn__):
 ```sh
-cat *vi*.jsonl > vi_merged.jsonl
+cat vi*.jsonl > vi_merged.jsonl
 ```
 
 ## Show me results

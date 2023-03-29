@@ -1,3 +1,8 @@
+
+
+https://user-images.githubusercontent.com/8133/228416626-5fb64f4d-2215-44de-9cd6-e0bff44b37f4.mp4
+
+
 # Dữ liệu chỉ dẫn để biến mô hình ngôn ngữ Việt thành chatbot
 
 - [alpaca instructions](https://github.com/tatsu-lab/stanford_alpaca): dịch bởi https://www.kaggle.com/datasets/iambestfeeder

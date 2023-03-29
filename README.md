@@ -1,4 +1,4 @@
-# Ngữ liệu chỉ dẫn để fine-tune mô hình ngôn ngữ Việt thành chatbot
+# Dữ liệu chỉ dẫn để biến mô hình ngôn ngữ Việt thành chatbot
 
 - [alpaca instructions](https://github.com/tatsu-lab/stanford_alpaca): dịch bởi https://www.kaggle.com/datasets/iambestfeeder
 

@@ -1,4 +1,4 @@
-# Ngữ liệu chỉ dẫn mô hình ngôn ngữ Việt
+# Ngữ liệu chỉ dẫn cho mô hình ngôn ngữ Việt
 
 - [Alpaca instructions](https://github.com/tatsu-lab/stanford_alpaca): dịch bởi https://www.kaggle.com/datasets/iambestfeeder/alpaca-data-vietnamese
 

@@ -1,6 +1,6 @@
 # Ngữ liệu chỉ dẫn cho mô hình ngôn ngữ Việt
 
-- [Alpaca instructions](https://github.com/tatsu-lab/stanford_alpaca): dịch bởi https://www.kaggle.com/datasets/iambestfeeder/alpaca-data-vietnamese
+- [Alpaca instructions](https://github.com/tatsu-lab/stanford_alpaca): dịch bởi https://www.kaggle.com/datasets/iambestfeeder
 
-- [daily_dialog](https://huggingface.co/datasets/daily_dialog): dịch bởi https://www.kaggle.com/datasets/iambestfeeder/multi-turn-dialog
+- [daily_dialog](https://huggingface.co/datasets/daily_dialog): dịch bởi https://www.kaggle.com/datasets/iambestfeeder
 

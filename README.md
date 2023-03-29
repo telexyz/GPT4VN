@@ -8,9 +8,9 @@ https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf
 
 - `daily_dialog_vi.txt`: dịch từ [daily_dialog](https://huggingface.co/datasets/daily_dialog) bởi [Iambestfeed](https://www.kaggle.com/datasets/iambestfeeder)
 
-- `vi_gpt4all_reduced_*.jsonl`: ~173k dịch từ [gpt4all](https://github.com/nomic-ai/gpt4all), loại bớt và dịch bởi Tuộc và [binhvq](https://github.com/binhvq)
+- `vi_gpt4all_reduced_*.jsonl`: ~173k lược bớt và dịch từ [gpt4all](https://github.com/nomic-ai/gpt4all) và dịch bởi Tuộc và [binhvq](https://github.com/binhvq)
 
-- `vi_alpaca_reduced.jsonl`: ~51k chỉ dẫn dịch từ [AlpacaDataCleaned](https://github.com/gururise/AlpacaDataCleaned), lược bớt và dịch bởi Tuộc và [binhvq](https://github.com/binhvq)
+- `vi_alpaca_reduced.jsonl`: ~51k chỉ dẫn lược bớt và dịch từ [AlpacaDataCleaned](https://github.com/gururise/AlpacaDataCleaned) bởi Tuộc và [binhvq](https://github.com/binhvq)
 
 Để tạo một file huấn luyện chung dùng lệnh:
 ```sh

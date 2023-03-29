@@ -1,3 +1,5 @@
+Tham gia thảo luận tại https://discord.gg/NuYwhH6Kbb
+
 # Ngữ liệu chỉ dẫn cho mô hình ngôn ngữ Việt
 
 - [alpaca instructions](https://github.com/tatsu-lab/stanford_alpaca): dịch bởi https://www.kaggle.com/datasets/iambestfeeder

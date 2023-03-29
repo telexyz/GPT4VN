@@ -12,7 +12,10 @@ https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf
 
 - `alpaca_vi_reduced.jsonl`: dịch từ [AlpacaDataCleaned](https://github.com/gururise/AlpacaDataCleaned), lược bớt và dịch bởi Tuộc và https://github.com/binhvq
 
-Để tạo một file huấn luyện chung dùng lệnh `cat *vi*.jsonl > vi_merged.jsonl`
+Để tạo một file huấn luyện chung dùng lệnh:
+```sh
+cat *vi*.jsonl > vi_merged.jsonl
+```
 
 ## Show me results
 Các bạn trong nhóm mình đã fine-tune thành công vietai/gpt-j-vietnews tại đây https://huggingface.co/hoaiht/vietnamese-alpaca-lora-gpt-j/tree/main

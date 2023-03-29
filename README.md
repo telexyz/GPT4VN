@@ -1,7 +1,7 @@
-Trải nghiệm với chatbot tại https://discord.gg/fQ9ja2jBR9
 
 https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf-cd90ba2dfd1c.mp4
 
+Trải nghiệm với chatbot tại https://discord.gg/fQ9ja2jBR9
 
 # Dữ liệu chỉ dẫn để biến mô hình ngôn ngữ Việt thành chatbot
 

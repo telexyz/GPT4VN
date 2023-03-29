@@ -12,7 +12,7 @@ https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf
 
 - `vi_alpaca_reduced.jsonl`: ~51k chỉ dẫn dịch từ [AlpacaDataCleaned](https://github.com/gururise/AlpacaDataCleaned), lược bớt và dịch bởi Tuộc và https://github.com/binhvq
 
-Để tạo một file huấn luyện chung dùng lệnh (tổng 224k chỉ dẫn):
+Để tạo một file huấn luyện chung dùng lệnh (__tổng 224k chỉ dẫn__):
 ```sh
 cat *vi*.jsonl > vi_merged.jsonl
 ```

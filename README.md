@@ -1,6 +1,6 @@
 # TODOs
-- ttps://huggingface.co/datasets/samsum
-- ttps://huggingface.co/datasets/JosephusCheung/GuanacoDataset
+- htps://huggingface.co/datasets/samsum
+- https://huggingface.co/datasets/JosephusCheung/GuanacoDataset
 - https://github.com/XueFuzhao/InstructionWild
 
 - - -

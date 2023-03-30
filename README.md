@@ -1,6 +1,7 @@
 # TODOs
-- Dịch https://huggingface.co/datasets/samsum
-- Dịch https://huggingface.co/datasets/JosephusCheung/GuanacoDataset
+- ttps://huggingface.co/datasets/samsum
+- ttps://huggingface.co/datasets/JosephusCheung/GuanacoDataset
+- https://github.com/XueFuzhao/InstructionWild
 
 - - -
 

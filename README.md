@@ -1,3 +1,9 @@
+# TODOs
+- Dịch https://huggingface.co/datasets/samsum
+- Dịch https://huggingface.co/datasets/JosephusCheung/GuanacoDataset
+
+- - -
+
 Trải nghiệm với chatbot tại https://discord.gg/fQ9ja2jBR9
 
 https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf-cd90ba2dfd1c.mp4
@@ -22,7 +28,3 @@ Các bạn trong nhóm mình đã fine-tune thành công vietai/gpt-j-vietnews t
 
 ## Show me how
 Tham gia thảo luận tại https://discord.gg/NuYwhH6Kbb để được hướng dẫn nhé. Nhóm sẽ release code sau.
-
-TODOs
-- Dịch https://huggingface.co/datasets/samsum
-- Dịch https://huggingface.co/datasets/JosephusCheung/GuanacoDataset

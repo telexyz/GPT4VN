@@ -1,5 +1,5 @@
 # TODOs
-- htps://huggingface.co/datasets/samsum
+- https://huggingface.co/datasets/samsum
 - https://huggingface.co/datasets/JosephusCheung/GuanacoDataset
 - https://github.com/XueFuzhao/InstructionWild
 

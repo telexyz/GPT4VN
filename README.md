@@ -22,3 +22,7 @@ Các bạn trong nhóm mình đã fine-tune thành công vietai/gpt-j-vietnews t
 
 ## Show me how
 Tham gia thảo luận tại https://discord.gg/NuYwhH6Kbb để được hướng dẫn nhé. Nhóm sẽ release code sau.
+
+TODOs
+- Dịch https://huggingface.co/datasets/samsum
+- Dịch https://huggingface.co/datasets/JosephusCheung/GuanacoDataset

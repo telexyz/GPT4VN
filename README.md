@@ -1,7 +1,8 @@
 # TODOs
 - https://huggingface.co/datasets/samsum
-- https://huggingface.co/datasets/JosephusCheung/GuanacoDataset
 - https://github.com/XueFuzhao/InstructionWild
+- https://github.com/google-research-datasets/presto
+- https://huggingface.co/datasets/JosephusCheung/GuanacoDataset
 - https://huggingface.co/datasets/Nebulous/gpt4all_pruned/blob/main/data_pruned_3.jsonl
 
 - - -

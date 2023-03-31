@@ -10,8 +10,9 @@ from peft import LoraConfig, get_peft_model, get_peft_model_state_dict, \
 def train(
     ## Use by deepspeed
     deepspeed,
-    per_device_train_batch_size=2,
-    per_device_eval_batch_size=2,
+    batch_size: int = 128,
+    per_device_train_batch_size=4,
+    per_device_eval_batch_size=4,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
     gradient_checkpointing=False,
@@ -52,6 +53,7 @@ def train(
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
     assert base_model
+    gradient_accumulation_steps = batch_size // micro_batch_size
 
     device_map = "auto"
     model = AutoModelForCausalLM.from_pretrained( base_model,
@@ -132,6 +134,7 @@ def train(
             bf16=bf16,
             per_device_train_batch_size=per_device_train_batch_size,
             per_device_eval_batch_size=per_device_eval_batch_size,
+            gradient_accumulation_steps=gradient_accumulation_steps,
             warmup_steps=100,
             num_train_epochs=num_epochs,
             learning_rate=learning_rate,

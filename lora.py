@@ -53,7 +53,7 @@ def train(
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
     assert base_model
-    gradient_accumulation_steps = batch_size // micro_batch_size
+    gradient_accumulation_steps = batch_size // per_device_train_batch_size
 
     device_map = "auto"
     model = AutoModelForCausalLM.from_pretrained( base_model,

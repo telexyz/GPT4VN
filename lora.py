@@ -184,9 +184,14 @@ def train(
     model.save_pretrained(output_dir)
     print("\nIf there's a warning about missing keys above, please disregard :)")
 
+def generate_qna_prompt(instruction):
+        return f"""Hãy viết một phản hồi thích hợp cho chỉ dẫn dưới đây.
 
-import sys; sys.path.append("../apps") # sử dụng chung generate_prompt với infer engine
-from prompt import generate_qna_prompt
+### Instruction:
+{instruction}
+
+### Response:"""
+
 def generate_prompt(data_point):
     question = data_point["prompt"].strip()
     answer = data_point["response"].strip()

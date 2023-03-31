@@ -10,8 +10,8 @@ from peft import LoraConfig, get_peft_model, get_peft_model_state_dict, \
 def train(
     ## Use by deepspeed
     deepspeed,
-    per_device_train_batch_size,
-    per_device_eval_batch_size,
+    per_device_train_batch_size=2,
+    per_device_eval_batch_size=2,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
     gradient_checkpointing=True,

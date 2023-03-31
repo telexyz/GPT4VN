@@ -39,7 +39,6 @@ def train(
         f"data_path: {data_path}\n"
         f"output_dir: {output_dir}\n"
         f"batch_size: {per_device_train_batch_size}\n"
-        f"micro_batch_size: {micro_batch_size}\n"
         f"num_epochs: {num_epochs}\n"
         f"learning_rate: {learning_rate}\n"
         f"cutoff_len: {cutoff_len}\n"

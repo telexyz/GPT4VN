@@ -13,6 +13,8 @@ def train(
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
     gradient_checkpointing=True,
+    per_device_train_batch_size,
+    per_device_eval_batch_size,
     data_path: str = "./vi_merged.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
     output_dir: str = "./chat-gpt-neo-1.3B-1e",
@@ -36,7 +38,7 @@ def train(
         f"base_model: {base_model}\n"
         f"data_path: {data_path}\n"
         f"output_dir: {output_dir}\n"
-        f"batch_size: {batch_size}\n"
+        f"batch_size: {per_device_train_batch_size}\n"
         f"micro_batch_size: {micro_batch_size}\n"
         f"num_epochs: {num_epochs}\n"
         f"learning_rate: {learning_rate}\n"
@@ -51,12 +53,6 @@ def train(
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
     assert base_model
-    gradient_accumulation_steps = batch_size // micro_batch_size
-
-    # device_map = "auto"
-    # model = AutoModelForCausalLM.from_pretrained( base_model,
-    #    # load_in_8bit=True, # Turn on to tiết kiệm vram?
-    #     torch_dtype=torch.float16, device_map=device_map)
 
     device_map = "auto"
     model = AutoModelForCausalLM.from_pretrained( base_model,
@@ -137,8 +133,8 @@ def train(
             gradient_checkpointing=gradient_checkpointing,
             fp16=False,
             bf16=bf16,
-            per_device_train_batch_size=micro_batch_size,
-            gradient_accumulation_steps=gradient_accumulation_steps,
+            per_device_train_batch_size=per_device_train_batch_size,
+            per_device_eval_batch_size=per_device_eval_batch_size,
             warmup_steps=100,
             num_train_epochs=num_epochs,
             learning_rate=learning_rate,

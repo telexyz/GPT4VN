@@ -135,9 +135,9 @@ def train(
             per_device_train_batch_size=per_device_train_batch_size,
             per_device_eval_batch_size=per_device_eval_batch_size,
             gradient_accumulation_steps=gradient_accumulation_steps,
-            warmup_steps=100,
+            # warmup_steps=100,
+            # learning_rate=learning_rate,
             num_train_epochs=num_epochs,
-            learning_rate=learning_rate,
             logging_steps=10,
             evaluation_strategy="steps" if val_set_size > 0 else "no",
             save_strategy="steps",
@@ -172,8 +172,8 @@ def train(
         model = torch.compile(model)
 
     trainer.train(resume_from_checkpoint=resume_from_checkpoint)
-    model.save_pretrained(output_dir)
-    print("\nIf there's a warning about missing keys above, please disregard :)")
+    # model.save_pretrained(output_dir)
+    trainer.save_model(output_dir=output_dir)
 
 from prompt import make_prompt
 def generate_prompt(data_point):

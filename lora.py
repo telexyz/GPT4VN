@@ -12,14 +12,12 @@ def train(
     deepspeed,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
-    gradient_checkpointing=False,
+    gradient_checkpointing=True,
     data_path: str = "./vi_merged.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
-    output_dir: str = "./chat-gpt-neo-1.3B-3e",
+    output_dir: str = "./chat-gpt-neo-1.3B-1e",
     # training hyperparams
-    batch_size: int = 512,
-    micro_batch_size: int = 16,
-    num_epochs: int = 3,
+    num_epochs: int = 1,
     learning_rate: float = 5e-5,
     cutoff_len: int = 256,
     val_set_size: int = 2000,
@@ -31,7 +29,7 @@ def train(
     # llm hyperparams
     train_on_inputs: bool = True,  # if False, masks out inputs in loss
     group_by_length: bool = False,  # faster, but produces an odd training loss curve
-    resume_from_checkpoint= None, # None or string: either training checkpoint or final adapter
+    resume_from_checkpoint= None,  # None or string: either training checkpoint or final adapter
 ):
     print(
         f"Training Alpaca-LoRA model with params:\n"
@@ -144,9 +142,6 @@ def train(
             warmup_steps=100,
             num_train_epochs=num_epochs,
             learning_rate=learning_rate,
-            ## Turn off to use deepspeed
-            # fp16=True,
-            # optim="adamw_torch",
             logging_steps=10,
             evaluation_strategy="steps" if val_set_size > 0 else "no",
             save_strategy="steps",

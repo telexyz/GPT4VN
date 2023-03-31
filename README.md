@@ -31,4 +31,7 @@ cat vi*.jsonl > vi_merged.jsonl
 Các bạn trong nhóm mình đã fine-tune thành công vietai/gpt-j-vietnews tại đây https://huggingface.co/hoaiht/vietnamese-alpaca-lora-gpt-j/tree/main
 
 ## Show me how
-Tham gia thảo luận tại https://discord.gg/NuYwhH6Kbb để được hướng dẫn nhé. Nhóm sẽ release code sau.
+```sh
+./lora-run.sh
+```
+Tham gia thảo luận tại https://discord.gg/NuYwhH6Kbb để được hướng dẫn nhé.

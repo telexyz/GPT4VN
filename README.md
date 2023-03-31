@@ -17,11 +17,14 @@ cat vi*.jsonl > vi_merged.jsonl
 
 
 ## Show me results
+
+Note: Nếu không tự chạy được thì hãy trải nghiệm với chatbot tại https://discord.gg/fQ9ja2jBR9
+
 ```sh
 ./chatbot.sh
 ```
-Nếu không tự chạy được thì hãy trải nghiệm với chatbot tại https://discord.gg/fQ9ja2jBR9
 
+![vietnam-chatbot](https://user-images.githubusercontent.com/8133/229118963-e34d4dd6-b1ba-4307-9453-043c5afdb979.png)
 
 ## Show me how
 ```sh

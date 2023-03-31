@@ -11,8 +11,8 @@ def train(
     ## Use by deepspeed
     deepspeed,
     batch_size: int = 128,
-    per_device_train_batch_size=4,
-    per_device_eval_batch_size=4,
+    per_device_train_batch_size=2,
+    per_device_eval_batch_size=2,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
     gradient_checkpointing=False,

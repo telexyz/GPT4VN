@@ -2,7 +2,8 @@
 - https://huggingface.co/datasets/samsum
 - https://github.com/XueFuzhao/InstructionWild
 - https://github.com/google-research-datasets/presto
-- https://huggingface.co/datasets/JosephusCheung/GuanacoDataset
+- [ ] https://huggingface.co/datasets/JosephusCheung/GuanacoDataset/raw/main/guanaco_chat_all-utf8.json
+- [ ] https://huggingface.co/datasets/blended_skill_talk
 - https://huggingface.co/datasets/Nebulous/gpt4all_pruned/blob/main/data_pruned_3.jsonl
 
 - - -

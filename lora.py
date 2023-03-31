@@ -10,11 +10,11 @@ from peft import LoraConfig, get_peft_model, get_peft_model_state_dict, \
 def train(
     ## Use by deepspeed
     deepspeed,
+    per_device_train_batch_size,
+    per_device_eval_batch_size,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
     gradient_checkpointing=True,
-    per_device_train_batch_size,
-    per_device_eval_batch_size,
     data_path: str = "./vi_merged.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
     output_dir: str = "./chat-gpt-neo-1.3B-1e",

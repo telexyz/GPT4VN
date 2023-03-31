@@ -2,3 +2,4 @@ accelerate
 fire
 deepspeed
 transformers[torch]
+peft

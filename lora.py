@@ -175,17 +175,10 @@ def train(
     model.save_pretrained(output_dir)
     print("\nIf there's a warning about missing keys above, please disregard :)")
 
-def generate_qna_prompt(instruction):
-        return f"""Hãy viết một phản hồi thích hợp cho chỉ dẫn dưới đây.
-
-### Instruction:
-{instruction}
-
-### Response:"""
-
+from chatbot import make_prompt
 def generate_prompt(data_point):
     question = data_point["prompt"].strip()
     answer = data_point["response"].strip()
-    return f"{generate_qna_prompt(question)}\n{answer}"
+    return f"{make_prompt(question)}\n{answer}"
 
 if __name__ == "__main__": fire.Fire(train)

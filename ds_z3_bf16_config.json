@@ -1,4 +1,3 @@
-// source https://github.com/databrickslabs/dolly/blob/master/config/ds_z3_bf16_config.json
 {
     "bf16": {
       "enabled": "auto"

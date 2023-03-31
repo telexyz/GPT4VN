@@ -1,5 +1,5 @@
-# source https://github.com/tloen/alpaca-lora/blob/main/finetune.py
-# https://www.philschmid.de/fine-tune-flan-t5-peft
+# Modified from https://github.com/tloen/alpaca-lora/blob/main/finetune.py
+
 import os, sys, fire, torch, transformers
 from typing import List
 from datasets import load_dataset

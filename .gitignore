@@ -1,1 +1,7 @@
 vi_merged.jsonl
+.chatbot.py.swp
+wandb/
+chat-gpt-neo-1.3B-1e/
+nohup.out
+__pycache__/
+

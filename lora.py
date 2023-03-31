@@ -1,5 +1,9 @@
-# Modified from https://github.com/tloen/alpaca-lora/blob/main/finetune.py
-# Add deepspeed support to reduced required vram and can train on multiple GPUs
+# - Rút gọn từ https://github.com/tloen/alpaca-lora/blob/main/finetune.py
+# - Hỗ trợ deepspeed:
+#   - giảm vram cho phép 1.3b model có thể LoRA trên 12G vram
+#   - huấn luyện nhanh hơn trên nhiều GPUs
+#   - ds config https://github.com/databrickslabs/dolly/blob/master/config/ds_z3_bf16_config.json
+
 import os, sys, fire, torch, transformers
 from typing import List
 from datasets import load_dataset
@@ -23,7 +27,7 @@ def train(
     num_epochs: int = 1,
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
-    val_set_size: int = 2000,
+    val_set_size: int = 200,
     # lora hyperparams
     lora_r: int = 8,
     lora_alpha: int = 16,

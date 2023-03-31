@@ -19,10 +19,7 @@ https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf
 cat vi*.jsonl > vi_merged.jsonl
 ```
 
-
-## Show me results
-
-
+## Show me the results
 
 ```sh
 ./chatbot.sh
@@ -36,7 +33,6 @@ cat vi*.jsonl > vi_merged.jsonl
 ```sh
 ./lora-run.sh
 ```
-Ví dụ mẫu chỉ cần GPU 12G vram chạy được trong vòng hơn 1h là xong.
+Ví dụ mẫu huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 51 nghìn câu chỉ cần trên GPU 3060 12G vram hoàn tất trong vòng một giờ.
 
 Tham gia thảo luận tại https://discord.gg/NuYwhH6Kbb để được hướng dẫn chi tiết.
-

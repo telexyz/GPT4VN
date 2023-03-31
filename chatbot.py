@@ -3,15 +3,7 @@ import sys
 import torch
 from peft import PeftModel
 from transformers import AutoTokenizer, AutoModelForCausalLM
-
-def make_prompt(instruction):
-        return f"""Hãy viết một phản hồi thích hợp cho chỉ dẫn dưới đây.
-
-### Instruction:
-{instruction}
-
-### Response:"""
-# END generate_qna_prompt
+from prompt import make_prompt
 
 BASE_MODEL = "VietAI/gpt-j-6B-vietnamese-news"
 LORA_WEIGHTS = "tiendung/chat-gpt-j-6B-2e"

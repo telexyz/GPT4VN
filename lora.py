@@ -175,7 +175,7 @@ def train(
     model.save_pretrained(output_dir)
     print("\nIf there's a warning about missing keys above, please disregard :)")
 
-from chatbot import make_prompt
+from prompt import make_prompt
 def generate_prompt(data_point):
     question = data_point["prompt"].strip()
     answer = data_point["response"].strip()

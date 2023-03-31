@@ -17,7 +17,7 @@ else:
 
 tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
 
-model = AutoModelForCausalLM.from_pretrained(BASE_MODEL, \
+model = AutoModelForCausalLM.from_pretrained(BASE_MODEL, load_in_8bit=True, \
     torch_dtype=torch.float16, device_map=device_map)
 
 model = PeftModel.from_pretrained(model, LORA_WEIGHTS, \

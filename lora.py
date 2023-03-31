@@ -27,7 +27,7 @@ def train(
     num_epochs: int = 1,
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
-    val_set_size: int = 200,
+    val_set_size: int = 2000,
     # lora hyperparams
     lora_r: int = 8,
     lora_alpha: int = 16,
@@ -176,8 +176,8 @@ def train(
         model = torch.compile(model)
 
     trainer.train(resume_from_checkpoint=resume_from_checkpoint)
-    # model.save_pretrained(output_dir)
-    trainer.save_model(output_dir=output_dir)
+    model.save_pretrained(output_dir)
+    # trainer.save_model(output_dir=output_dir)
 
 from prompt import make_prompt
 def generate_prompt(data_point):

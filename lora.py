@@ -14,7 +14,7 @@ def train(
     per_device_eval_batch_size=2,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
-    gradient_checkpointing=True,
+    gradient_checkpointing=False,
     data_path: str = "./vi_merged.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
     output_dir: str = "./chat-gpt-neo-1.3B-1e",

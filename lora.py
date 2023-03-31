@@ -20,7 +20,7 @@ def train(
     output_dir: str = "./chat-gpt-neo-1.3B-1e",
     # training hyperparams
     num_epochs: int = 1,
-    learning_rate: float = 5e-5,
+    learning_rate: float = 3e-4,
     cutoff_len: int = 256,
     val_set_size: int = 2000,
     # lora hyperparams
@@ -98,10 +98,8 @@ def train(
         task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, config)
-
-    if ".json" in data_path: data = load_dataset("json", data_files=data_path)
-    else: data = load_dataset(data_path)
-
+    data = load_dataset("json", data_files=data_path)
+    
     if resume_from_checkpoint:
         # Check the available weights and load them
         checkpoint_name = os.path.join(resume_from_checkpoint, "pytorch_model.bin")  # Full checkpoint

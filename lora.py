@@ -1,5 +1,5 @@
-# source https://github.com/tloen/alpaca-lora/blob/main/finetune.py
-# https://www.philschmid.de/fine-tune-flan-t5-peft
+# Modified from https://github.com/tloen/alpaca-lora/blob/main/finetune.py
+# Add deepspeed support to reduced required vram and can train on multiple GPUs
 import os, sys, fire, torch, transformers
 from typing import List
 from datasets import load_dataset

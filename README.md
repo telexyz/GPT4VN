@@ -2,6 +2,7 @@
 - https://huggingface.co/datasets/samsum
 - https://huggingface.co/datasets/JosephusCheung/GuanacoDataset
 - https://github.com/XueFuzhao/InstructionWild
+- https://huggingface.co/datasets/Nebulous/gpt4all_pruned/blob/main/data_pruned_3.jsonl
 
 - - -
 

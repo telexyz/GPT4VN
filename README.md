@@ -1,6 +1,8 @@
+# GPT4VN
+
 https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf-cd90ba2dfd1c.mp4
 
-# Hơn 224k câu chỉ dẫn và hội thoại để biến mô hình ngôn ngữ thành chatbot
+## Dữ liệu chỉ dẫn và hội thoại
 
 - `alpaca_vi.txt`: dịch từ [stanford_alpaca](https://github.com/tatsu-lab/stanford_alpaca) bởi [Iambestfeed](https://github.com/Iambestfeed)
 

@@ -33,6 +33,6 @@ cat vi*.jsonl > vi_merged.jsonl
 ```sh
 ./lora-run.sh
 ```
-Ví dụ mẫu huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 51 nghìn câu chỉ cần trên GPU 3060 12G vram hoàn tất trong vòng một giờ.
+Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 51 nghìn câu chỉ cần trên GPU 3060 12G vram hoàn tất trong vòng một giờ cho một epoch. Cùng setting trên huấn luyện trên 4 GPU A100 mất 4 phút.
 
 Tham gia thảo luận tại https://discord.gg/NuYwhH6Kbb để được hướng dẫn chi tiết.

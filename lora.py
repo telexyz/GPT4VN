@@ -23,7 +23,7 @@ def train(
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
     output_dir: str = "./chat-gpt-neo-1.3B-1e",
     # training hyperparams
-    num_epochs: int = 1,
+    num_epochs: int = 3,
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
     val_set_size: int = 2000,

@@ -1,7 +1,7 @@
 # - Rút gọn từ https://github.com/tloen/alpaca-lora/blob/main/finetune.py
 # - Hỗ trợ deepspeed:
 #   - giảm vram cho phép 1.3b model có thể LoRA trên 12G vram
-#   - huấn luyện nhanh hơn trên nhiều GPUs
+#   - huấn luyện nhanh hơn trên nhiều GPUs => !!! Đang bị lỗi save model !!!
 #   - ds config https://github.com/databrickslabs/dolly/blob/master/config/ds_z3_bf16_config.json
 
 import os, sys, fire, torch, transformers
@@ -10,6 +10,8 @@ from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import LoraConfig, get_peft_model, get_peft_model_state_dict, \
     prepare_model_for_int8_training, set_peft_model_state_dict
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false" # turn off warning
 
 def train(
     ## Use by deepspeed

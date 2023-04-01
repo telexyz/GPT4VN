@@ -151,8 +151,7 @@ def train(
             load_best_model_at_end=True if val_set_size > 0 else False,
             ddp_find_unused_parameters=None,
             group_by_length=group_by_length,
-            report_to=None,
-            run_name=None,
+            report_to="none",
     )
 
     trainer = transformers.Trainer(

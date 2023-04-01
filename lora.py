@@ -21,7 +21,7 @@ def train(
     gradient_checkpointing=False,
     data_path: str = "./vi_merged.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
-    output_dir: str = "./chat-gpt-neo-1.3B-1e",
+    output_dir: str = "./chat-gpt-neo-1.3B-3e",
     # training hyperparams
     num_epochs: int = 3,
     learning_rate: float = 3e-4,

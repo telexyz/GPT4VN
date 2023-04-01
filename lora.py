@@ -16,6 +16,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false" # turn off warning
 def train(
     ## Use by deepspeed
     deepspeed,
+    batch_size: int = 256,
     per_device_batch_size=2,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
@@ -41,6 +42,7 @@ def train(
         f"base_model: {base_model}\n"
         f"data_path: {data_path}\n"
         f"output_dir: {output_dir}\n"
+        f"batch_size: {batch_size}\n"
         f"per_device_batch_size: {per_device_batch_size}\n"
         f"cutoff_len: {cutoff_len}\n"
         f"val_set_size: {val_set_size}\n"
@@ -51,6 +53,7 @@ def train(
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
     assert base_model
+    gradient_accumulation_steps = batch_size // per_device_batch_size
 
     device_map = "auto"
     model = AutoModelForCausalLM.from_pretrained( base_model,
@@ -126,6 +129,7 @@ def train(
             learning_rate=lr,
             per_device_train_batch_size=per_device_batch_size,
             per_device_eval_batch_size=per_device_batch_size,
+            gradient_accumulation_steps=gradient_accumulation_steps,
             num_train_epochs=num_epochs,
             logging_steps=10,
             evaluation_strategy="steps" if val_set_size > 0 else "no",

@@ -15,8 +15,7 @@ def train(
     ## Use by deepspeed
     deepspeed,
     batch_size: int = 128,
-    per_device_train_batch_size=2,
-    per_device_eval_batch_size=2,
+    per_device_batch_size=2,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
     gradient_checkpointing=False,
@@ -43,8 +42,8 @@ def train(
         f"base_model: {base_model}\n"
         f"data_path: {data_path}\n"
         f"output_dir: {output_dir}\n"
-        f"batch_size: {per_device_train_batch_size}\n"
-        f"num_epochs: {num_epochs}\n"
+        f"batch_size: {batch_size}\n"
+        f"per_device_batch_size: {per_device_batch_size}\n"
         f"learning_rate: {learning_rate}\n"
         f"cutoff_len: {cutoff_len}\n"
         f"val_set_size: {val_set_size}\n"
@@ -136,8 +135,8 @@ def train(
             gradient_checkpointing=gradient_checkpointing,
             fp16=False,
             bf16=bf16,
-            per_device_train_batch_size=per_device_train_batch_size,
-            per_device_eval_batch_size=per_device_eval_batch_size,
+            per_device_train_batch_size=per_device_batch_size,
+            per_device_eval_batch_size=per_device_batch_size,
             gradient_accumulation_steps=gradient_accumulation_steps,
             # warmup_steps=100,
             # learning_rate=learning_rate,

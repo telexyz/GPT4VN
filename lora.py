@@ -16,7 +16,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false" # turn off warning
 def train(
     ## Use by deepspeed
     deepspeed,
-    batch_size: int = 256,
+    batch_size=256,
     per_device_batch_size=4,
     local_rank=True,
     fp16=False,
@@ -36,12 +36,14 @@ def train(
     lora_dropout: float = 0.05,
     lora_target_modules: List[str] = ["q_proj", "v_proj"],
     # llm hyperparams
-    resume_from_checkpoint= None,  # None or string: either training checkpoint or final adapter
+    resume_from_checkpoint: str = None,  # None or string: either training checkpoint or final adapter
 ):
     if isinstance(lora_target_modules, str):
         lora_target_modules = lora_target_modules.split()
     if fp16 == "True": fp16 = True
     if bf16 == "True": bf16 = True
+    if fp16 == "False": fp16 = False
+    if bf16 == "False": bf16 = False
 
     print(
         f"Training LoRA model with params:\n"

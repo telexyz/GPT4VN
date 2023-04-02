@@ -3,3 +3,4 @@ fire
 deepspeed
 transformers[torch]
 peft
+datasets

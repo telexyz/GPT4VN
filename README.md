@@ -37,5 +37,6 @@ python3 finetune.py --data_path 'vi_alpaca_reduced.jsonl' \
 Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 51 nghìn câu trên GPU 3060 12G vram hoàn tất trong khoảng hơn giờ cho một epoch.
 
 Bất kì ai cũng có thể chạy thử với google colab tại https://colab.research.google.com/drive/11XSZkOfoPbFIIGAs9gRgMuLVQ9mJBPIi
+![image](https://user-images.githubusercontent.com/8133/229356381-2a8537ad-5c72-45e0-99b3-e130b41e0138.png)
 
 > THAM GIA THẢO LUẬN TẠI https://discord.gg/NuYwhH6Kbb

@@ -23,20 +23,22 @@ from peft import (  # noqa: E402
 from transformers import AutoTokenizer, AutoModelForCausalLM # noqa: F402
 
 def train(
+    fp16=False,
+    bf16=True, # Whether to use bf16 (preferred on A100's).
     data_path: str = "./vi_merged.jsonl",
     #####
-    # base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
-    # output_dir: str = "./chat-gpt-neo-1.3B",
+    base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
+    output_dir: str = "./chat-gpt-neo-1.3B",
     ####
-    base_model: str = "VietAI/gpt-j-6B-vietnamese-news",
-    output_dir: str = "./chat-gpt-j-6B-1e",
+    # base_model: str = "VietAI/gpt-j-6B-vietnamese-news",
+    # output_dir: str = "./chat-gpt-j-6B-1e",
     # training hyperparams
-    batch_size: int = 256,
-    micro_batch_size: int = 8,
+    batch_size: int = 128,
+    micro_batch_size: int = 2,
     num_epochs: int = 1,
     learning_rate: float = 5e-5,
     cutoff_len: int = 256,
-    val_set_size: int = 2000,
+    val_set_size: int = 200,
     # lora hyperparams
     lora_r: int = 16,
     lora_alpha: int = 16,
@@ -44,7 +46,6 @@ def train(
     lora_target_modules: List[str] = ["q_proj", "v_proj"], # gpt-3
     # lora_target_modules: List[str] = ["c_proj"], # gpt-2
     # llm hyperparams
-    train_on_inputs: bool = True,  # if False, masks out inputs in loss
     group_by_length: bool = False,  # faster, but produces an odd training loss curve
     resume_from_checkpoint: str = None,  # either training checkpoint or final adapter
 ):
@@ -66,7 +67,6 @@ def train(
         f"lora_alpha: {lora_alpha}\n"
         f"lora_dropout: {lora_dropout}\n"
         f"lora_target_modules: {lora_target_modules}\n"
-        f"train_on_inputs: {train_on_inputs}\n"
         f"group_by_length: {group_by_length}\n"
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
@@ -122,16 +122,6 @@ def train(
     def generate_and_tokenize_prompt(data_point):
         full_prompt = generate_prompt(data_point)
         tokenized_full_prompt = tokenize(full_prompt)
-        if not train_on_inputs:
-            user_prompt = generate_prompt({**data_point, "output": ""})
-            tokenized_user_prompt = tokenize(user_prompt, add_eos_token=False)
-            user_prompt_len = len(tokenized_user_prompt["input_ids"])
-
-            tokenized_full_prompt["labels"] = [
-                -100
-            ] * user_prompt_len + tokenized_full_prompt["labels"][
-                user_prompt_len:
-            ]  # could be sped up, probably
         return tokenized_full_prompt
 
     model = prepare_model_for_int8_training(model)
@@ -194,7 +184,8 @@ def train(
             warmup_steps=100,
             num_train_epochs=num_epochs,
             learning_rate=learning_rate,
-            fp16=True,
+            fp16=fp16,
+            bf16=bf16,
             logging_steps=10,
             optim="adamw_torch",
             evaluation_strategy="steps" if val_set_size > 0 else "no",
@@ -233,10 +224,8 @@ def train(
 
     trainer.train(resume_from_checkpoint=resume_from_checkpoint)
     model.save_pretrained(output_dir)
-    # print("\nIf there's a warning about missing keys above, please disregard :)")
 
 
-import sys; sys.path.append("../apps") # sử dụng chung generate_prompt với infer engine
 from prompt import make_prompt
 def generate_prompt(data_point):
     question = data_point["prompt"].strip()

@@ -4,7 +4,7 @@
 python3 finetune.py --data_path 'vi_alpaca_reduced.jsonl' \
 	--base_model 'truongpdd/vietnews-gpt2' --output_dir 'chat-gpt2-200m-1e' \
 	--batch_size=128 --micro_batch_size 2 --num_epochs 1 \
-	--
+	--lora_target_modules 'c_proj'
 
   # (transformer): GPT2Model(
   #   (wte): Embedding(50257, 768)

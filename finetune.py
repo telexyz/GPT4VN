@@ -41,12 +41,16 @@ def train(
     lora_r: int = 16,
     lora_alpha: int = 16,
     lora_dropout: float = 0.05,
-    lora_target_modules: List[str] = ["c_proj"],
+    lora_target_modules: List[str] = ["q_proj", "v_proj"], # gpt-3
+    # lora_target_modules: List[str] = ["c_proj"], # gpt-2
     # llm hyperparams
     train_on_inputs: bool = True,  # if False, masks out inputs in loss
     group_by_length: bool = False,  # faster, but produces an odd training loss curve
     resume_from_checkpoint: str = None,  # either training checkpoint or final adapter
 ):
+    if isinstance(lora_target_modules, str):
+        lora_target_modules = lora_target_modules.split()
+
     print(
         f"Training LoRA model with params:\n"
         f"base_model: {base_model}\n"

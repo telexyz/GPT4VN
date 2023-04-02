@@ -17,15 +17,15 @@ def train(
     ## Use by deepspeed
     deepspeed,
     batch_size: int = 256,
-    per_device_batch_size=2,
+    per_device_batch_size=4,
     local_rank=True,
     bf16=True, # Whether to use bf16 (preferred on A100's).
     gradient_checkpointing=False,
-    data_path: str = "./vi_merged.jsonl",
+    data_path: str = "./vi_alpaca_reduced.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
-    output_dir: str = "./chat-gpt-neo-1.3B-3e",
+    output_dir: str = "./chat-gpt-neo-1.3B",
     # training hyperparams
-    num_epochs: int = 1,
+    num_epochs: int = 3,
     lr: float = 5e-5,
     cutoff_len: int = 256,
     val_set_size: int = 2000,

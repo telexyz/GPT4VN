@@ -5,8 +5,10 @@ from peft import PeftModel
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from prompt import make_prompt
 
-BASE_MODEL = "VietAI/gpt-j-6B-vietnamese-news"
-LORA_WEIGHTS = "tiendung/chat-gpt-j-6B-2e"
+#BASE_MODEL = "VietAI/gpt-j-6B-vietnamese-news"
+#LORA_WEIGHTS = "tiendung/chat-gpt-j-6B-2e"
+BASE_MODEL = "VietAI/gpt-neo-1.3B-vietnamese-news"
+LORA_WEIGHTS = "tiendung/chat-gpt-neo-1.3B-2e"
 
 if torch.cuda.is_available():
     device = "cuda"

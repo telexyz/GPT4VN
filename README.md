@@ -4,6 +4,7 @@ Hãy biến mô hình ngôn ngữ thành chatbot
 
 https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf-cd90ba2dfd1c.mp4
 
+
 > THAM GIA THẢO LUẬN TẠI https://discord.gg/NuYwhH6Kbb
 
 ## Dữ liệu chỉ dẫn và hội thoại

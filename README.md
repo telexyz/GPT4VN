@@ -33,6 +33,13 @@ cat vi*.jsonl > vi_merged.jsonl
 ```sh
 deepspeed --num_gpus=1 lora.py --deepspeed ds_z3_bf16_config.json --data_path vi_alpaca_reduced.jsonl
 ```
-Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 51 nghìn câu chỉ cần trên GPU 3060 12G vram hoàn tất trong khoảng một giờ cho một epoch. Cùng setting trên huấn luyện trên 4 GPU A100 mất tầm 5 phút. Nên huấn luyện cho tới khi loss ổn định (tham khảo các kịch bạn huấn luyện tại `lora-run.sh`).
+Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 51 nghìn câu chỉ cần trên GPU 3060 12G vram hoàn tất trong khoảng một giờ cho một epoch. Cùng setting trên huấn luyện trên 4 GPU A100 mất tầm 5 phút. Nên huấn luyện cho tới khi loss ổn định (tham khảo thêm `lora-run.sh`).
+
+Extreme case, chatbot với `truongpdd/vietnews-gpt2` 200m params, có thể chạy trên 4G vram GPU
+```sh
+deepspeed lora.py --deepspeed ds_z3_bf16_config.json --data_path 'vi_alpaca_reduced.jsonl' \
+        --base_model 'truongpdd/vietnews-gpt2' --output_dir 'chat-gpt2-200m-3e' \
+        --batch_size=128 --per_device_batch_size 2 --num_epochs 3 --lora_target_modules 'c_proj'
+```
 
 > THAM GIA THẢO LUẬN TẠI https://discord.gg/NuYwhH6Kbb

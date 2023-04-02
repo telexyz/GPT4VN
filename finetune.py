@@ -36,7 +36,7 @@ def train(
     batch_size: int = 128,
     micro_batch_size: int = 2,
     num_epochs: int = 1,
-    learning_rate: float = 5e-5,
+    learning_rate: float = 3e-4,
     cutoff_len: int = 256,
     val_set_size: int = 200,
     # lora hyperparams

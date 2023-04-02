@@ -19,6 +19,7 @@ def train(
     batch_size: int = 256,
     per_device_batch_size=4,
     local_rank=True,
+    fp16=False,
     bf16=True, # Whether to use bf16 (preferred on A100's).
     gradient_checkpointing=False,
     data_path: str = "./vi_alpaca_reduced.jsonl",
@@ -127,7 +128,7 @@ def train(
     training_args = transformers.TrainingArguments(
             deepspeed=deepspeed,
             gradient_checkpointing=gradient_checkpointing,
-            fp16=False,
+            fp16=fp16,
             bf16=bf16,
             learning_rate=lr,
             per_device_train_batch_size=per_device_batch_size,

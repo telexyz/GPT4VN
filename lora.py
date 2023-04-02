@@ -40,6 +40,8 @@ def train(
 ):
     if isinstance(lora_target_modules, str):
         lora_target_modules = lora_target_modules.split()
+    if fp16 == "True": fp16 = True
+    if bf16 == "True": bf16 = True
 
     print(
         f"Training LoRA model with params:\n"

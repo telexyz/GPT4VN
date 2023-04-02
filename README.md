@@ -24,7 +24,7 @@ cat vi*.jsonl > vi_merged.jsonl
 ## Show me the results
 
 ```sh
-./chatbot.sh
+python3 chatbot.py
 ```
 
 ![vietnam-chatbot](https://user-images.githubusercontent.com/8133/229118963-e34d4dd6-b1ba-4307-9453-043c5afdb979.png)

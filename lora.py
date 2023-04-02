@@ -33,7 +33,7 @@ def train(
     lora_r: int = 8,
     lora_alpha: int = 16,
     lora_dropout: float = 0.05,
-    lora_target_modules: List[str] = ["q_proj", "v_proj"],
+    # lora_target_modules: List[str] = ["q_proj", "v_proj"],
     # llm hyperparams
     resume_from_checkpoint= None,  # None or string: either training checkpoint or final adapter
 ):
@@ -49,7 +49,7 @@ def train(
         f"lora_r: {lora_r}\n"
         f"lora_alpha: {lora_alpha}\n"
         f"lora_dropout: {lora_dropout}\n"
-        f"lora_target_modules: {lora_target_modules}\n"
+        # f"lora_target_modules: {lora_target_modules}\n"
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
     assert base_model
@@ -88,7 +88,7 @@ def train(
     config = LoraConfig(
         r=lora_r,
         lora_alpha=lora_alpha,
-        target_modules=lora_target_modules,
+        # target_modules=lora_target_modules,
         lora_dropout=lora_dropout,
         bias="none",
         task_type="CAUSAL_LM",

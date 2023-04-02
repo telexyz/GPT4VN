@@ -39,4 +39,6 @@ Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` 
 Bất kì ai cũng có thể chạy thử với google colab tại https://colab.research.google.com/drive/11XSZkOfoPbFIIGAs9gRgMuLVQ9mJBPIi
 ![image](https://user-images.githubusercontent.com/8133/229356381-2a8537ad-5c72-45e0-99b3-e130b41e0138.png)
 
+![image](https://user-images.githubusercontent.com/8133/229362159-19017749-b550-4337-9313-efe63f02927b.png)
+
 > THAM GIA THẢO LUẬN TẠI https://discord.gg/NuYwhH6Kbb

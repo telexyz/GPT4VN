@@ -37,4 +37,6 @@ deepspeed lora.py --deepspeed ds_z3_bf16_config.json --data_path 'vi_alpaca_redu
 
 Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 51 nghìn câu trên GPU 3060 12G vram hoàn tất trong khoảng một giờ cho một epoch. Cùng setting trên huấn luyện trên 4 GPU A100 mất tầm 5 phút. Nên huấn luyện cho tới khi loss ổn định (tham khảo thêm `lora-run.sh`).
 
+Có thể chạy thử với google colab tại https://colab.research.google.com/drive/11XSZkOfoPbFIIGAs9gRgMuLVQ9mJBPIi nhưng tốc độ huấn luyện chậm đi 4 lần so với 3060 :(
+
 > THAM GIA THẢO LUẬN TẠI https://discord.gg/NuYwhH6Kbb

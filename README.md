@@ -4,6 +4,8 @@ Hãy biến mô hình ngôn ngữ thành chatbot
 
 https://user-images.githubusercontent.com/8133/228418280-ba026ee4-11ef-4c8e-9edf-cd90ba2dfd1c.mp4
 
+> THAM GIA THẢO LUẬN TẠI https://discord.gg/NuYwhH6Kbb
+
 ## Dữ liệu chỉ dẫn và hội thoại
 
 - `alpaca_vi.txt`: dịch từ [stanford_alpaca](https://github.com/tatsu-lab/stanford_alpaca) bởi [Iambestfeed](https://github.com/Iambestfeed)
@@ -40,5 +42,3 @@ Bất kì ai cũng có thể chạy thử với google colab tại https://colab
 ![image](https://user-images.githubusercontent.com/8133/229356381-2a8537ad-5c72-45e0-99b3-e130b41e0138.png)
 
 ![image](https://user-images.githubusercontent.com/8133/229362159-19017749-b550-4337-9313-efe63f02927b.png)
-
-> THAM GIA THẢO LUẬN TẠI https://discord.gg/NuYwhH6Kbb

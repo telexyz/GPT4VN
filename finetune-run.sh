@@ -1,9 +1,9 @@
-################################
-# one epoch on vi_alpaca_reduced 
-################################
+###############################
+# 3 epochs on vi_alpaca_reduced 
+###############################
 python3 finetune.py --data_path 'vi_alpaca_reduced.jsonl' \
-    --batch_size=128 --micro_batch_size 4 --num_epochs 3 --output_dir 'chat-gpt-neo-1.3B-3e' \
-    # --bf16 False --fp16 True # <= để chạy trên Google Colab (GPUs đời cũ)
+    --batch_size=128 --micro_batch_size 2 --num_epochs 3 --output_dir 'chat-gpt-neo-1.3B-3e' \
+    # --bf16 False --fp16 True # <= để chạy trên Google Colab (hoặc GPUs đời cũ)
 
 
 #######################

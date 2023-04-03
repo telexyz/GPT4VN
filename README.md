@@ -35,11 +35,11 @@ python3 chatbot.py
 ## Show me how
 ```sh
 cat vi*.jsonl > vi_merged.jsonl
-python3 finetune.py --data_path 'vi_merged.jsonl' \
-    --batch_size=128 --micro_batch_size 2 --num_epochs 1 --output_dir 'chat-gpt-neo-1.3B-1e'
+python3 finetune.py --data_path 'vi_merged.jsonl' --base_model 'VietAI/gpt-j-6B-vietnamese-news' \
+    --batch_size=128 --micro_batch_size 2 --cutoff_len 512 --num_epochs 1 --output_dir 'chat-gpt-j-6B-1e'
 ```
-Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 224 nghìn câu trên GPU 3060 12G vram hoàn tất 1 epoch trong khoảng hơn 6h.
+Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-j-6B-vietnamese-news` với 224 nghìn câu trên GPU 3060 12G vram hoàn tất 1 epoch trong khoảng hơn 21h.
 
-Chạy với google colab tại https://colab.research.google.com/drive/11XSZkOfoPbFIIGAs9gRgMuLVQ9mJBPIi
+Chạy với google colab với model nhỏ hơn tại https://colab.research.google.com/drive/11XSZkOfoPbFIIGAs9gRgMuLVQ9mJBPIi
 ![image](https://user-images.githubusercontent.com/8133/229356381-2a8537ad-5c72-45e0-99b3-e130b41e0138.png)
 ![image](https://user-images.githubusercontent.com/8133/229362159-19017749-b550-4337-9313-efe63f02927b.png)

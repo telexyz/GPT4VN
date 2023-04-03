@@ -22,8 +22,8 @@ from peft import (  # noqa: E402
 from transformers import AutoTokenizer, AutoModelForCausalLM # noqa: F402
 
 def train(
-    fp16: bool = False,
-    bf16: bool = True, # Whether to use bf16 (preferred on A100's).
+    fp16: bool = True,
+    bf16: bool = False, # Whether to use bf16 (preferred on A100's).
     data_path: str = "./vi_merged.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
     output_dir: str = "./chat-gpt-neo-1.3B",

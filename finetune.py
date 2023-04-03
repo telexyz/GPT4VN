@@ -24,6 +24,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM # noqa: F402
 def train(
     fp16: bool = True,
     bf16: bool = False, # Whether to use bf16 (preferred on A100's).
+    load_in_8bit: bool = True,
     data_path: str = "./vi_merged.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
     output_dir: str = "./chat-gpt-neo-1.3B",
@@ -81,7 +82,7 @@ def train(
 
     model = AutoModelForCausalLM.from_pretrained(
         base_model,
-        load_in_8bit=True,
+        load_in_8bit=load_in_8bit,
         torch_dtype=torch.float16,
         device_map=device_map,
     )

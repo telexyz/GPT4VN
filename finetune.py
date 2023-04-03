@@ -1,5 +1,4 @@
-# source https://github.com/tloen/alpaca-lora/blob/main/finetune.py
-
+# Rút gọn từ https://github.com/tloen/alpaca-lora/blob/main/finetune.py
 import os
 try: os.environ["CUDA_VISIBLE_DEVICES"]
 except: os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -23,13 +22,11 @@ from peft import (  # noqa: E402
 from transformers import AutoTokenizer, AutoModelForCausalLM # noqa: F402
 
 def train(
-    fp16=False,
-    bf16=True, # Whether to use bf16 (preferred on A100's).
+    fp16: bool = False,
+    bf16: bool = True, # Whether to use bf16 (preferred on A100's).
     data_path: str = "./vi_merged.jsonl",
-    #####
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
     output_dir: str = "./chat-gpt-neo-1.3B",
-    ####
     # base_model: str = "VietAI/gpt-j-6B-vietnamese-news",
     # output_dir: str = "./chat-gpt-j-6B-1e",
     # training hyperparams
@@ -72,34 +69,29 @@ def train(
     )
     assert (
         base_model
-    ), "Please specify a --base_model, e.g. --base_model='decapoda-research/llama-7b-hf'"
+    ), "Please specify a --base_model, e.g. --base_model='VietAI/gpt-j-6B-vietnamese-news'"
     gradient_accumulation_steps = batch_size // micro_batch_size
 
     device_map = "auto"
     world_size = int(os.environ.get("WORLD_SIZE", 1))
     ddp = world_size != 1
-    if ddp:
+    if ddp: # huấn luyện đa GPUs
         device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)}
         gradient_accumulation_steps = gradient_accumulation_steps // world_size
 
     model = AutoModelForCausalLM.from_pretrained(
         base_model,
-       # load_in_8bit=True,
+        load_in_8bit=True,
         torch_dtype=torch.float16,
         device_map=device_map,
     )
-    print(model.state_dict)
+    # print(model.state_dict)
 
     tokenizer = AutoTokenizer.from_pretrained(base_model)
-
-    tokenizer.pad_token_id = (
-        0  # unk. we want this to be different from the eos token
-    )
+    tokenizer.pad_token_id = 0 # unk. we want this to be different from the eos token
     tokenizer.padding_side = "left"  # Allow batched inference
 
     def tokenize(prompt, add_eos_token=True):
-        # there's probably a way to do this with the tokenizer settings
-        # but again, gotta move fast
         result = tokenizer(
             prompt,
             truncation=True,
@@ -116,13 +108,11 @@ def train(
             result["attention_mask"].append(1)
 
         result["labels"] = result["input_ids"].copy()
-
         return result
 
     def generate_and_tokenize_prompt(data_point):
         full_prompt = generate_prompt(data_point)
-        tokenized_full_prompt = tokenize(full_prompt)
-        return tokenized_full_prompt
+        return tokenize(full_prompt)
 
     model = prepare_model_for_int8_training(model)
 
@@ -164,28 +154,22 @@ def train(
     model.print_trainable_parameters()  # Be more transparent about the % of trainable params.
 
     if val_set_size > 0:
-        train_val = data["train"].train_test_split(
-            test_size=val_set_size, shuffle=True, seed=42
-        )
-        train_data = (
-            train_val["train"].shuffle().map(generate_and_tokenize_prompt)
-        )
-        val_data = (
-            train_val["test"].shuffle().map(generate_and_tokenize_prompt)
-        )
+        train_val = data["train"].train_test_split(test_size=val_set_size, shuffle=True, seed=42)
+        train_data = train_val["train"].shuffle().map(generate_and_tokenize_prompt)
+        val_data = train_val["test"].shuffle().map(generate_and_tokenize_prompt)
     else:
         train_data = data["train"].shuffle().map(generate_and_tokenize_prompt)
         val_data = None
 
 
     training_args = transformers.TrainingArguments(
+            fp16=fp16,
+            bf16=bf16,
             per_device_train_batch_size=micro_batch_size,
             gradient_accumulation_steps=gradient_accumulation_steps,
             warmup_steps=100,
             num_train_epochs=num_epochs,
             learning_rate=learning_rate,
-            fp16=fp16,
-            bf16=bf16,
             logging_steps=10,
             optim="adamw_torch",
             evaluation_strategy="steps" if val_set_size > 0 else "no",
@@ -214,9 +198,7 @@ def train(
 
     old_state_dict = model.state_dict
     model.state_dict = (
-        lambda self, *_, **__: get_peft_model_state_dict(
-            self, old_state_dict()
-        )
+        lambda self, *_, **__: get_peft_model_state_dict(self, old_state_dict())
     ).__get__(model, type(model))
 
     if torch.__version__ >= "2" and sys.platform != "win32":

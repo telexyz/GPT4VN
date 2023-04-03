@@ -34,12 +34,12 @@ python3 chatbot.py
 
 ## Show me how
 ```sh
-python3 finetune.py --data_path 'vi_alpaca_reduced.jsonl' \
+cat vi*.jsonl > vi_merged.jsonl
+python3 finetune.py --data_path 'vi_merged.jsonl' \
     --batch_size=128 --micro_batch_size 2 --num_epochs 1 --output_dir 'chat-gpt-neo-1.3B-1e'
 ```
-Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 51 nghìn câu trên GPU 3060 12G vram hoàn tất trong khoảng hơn giờ cho một epoch. Nên huấn luyện 3 epochs, hoặc huấn luyện 1 lần trên toàn bộ dữ liệu.
+Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-neo-1.3B-vietnamese-news` với 224 nghìn câu trên GPU 3060 12G vram hoàn tất trong khoảng hơn 5h.
 
 Chạy với google colab tại https://colab.research.google.com/drive/11XSZkOfoPbFIIGAs9gRgMuLVQ9mJBPIi
 ![image](https://user-images.githubusercontent.com/8133/229356381-2a8537ad-5c72-45e0-99b3-e130b41e0138.png)
-
 ![image](https://user-images.githubusercontent.com/8133/229362159-19017749-b550-4337-9313-efe63f02927b.png)

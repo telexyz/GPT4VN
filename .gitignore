@@ -4,4 +4,5 @@ wandb/
 chat-gpt*
 nohup.out
 __pycache__/
-
+env
+js/

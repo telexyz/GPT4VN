@@ -14,6 +14,7 @@ from datasets import load_dataset
 
 from peft import (  # noqa: E402
     LoraConfig,
+    PrefixTuningConfig,
     get_peft_model,
     get_peft_model_state_dict,
     prepare_model_for_int8_training,
@@ -22,14 +23,12 @@ from peft import (  # noqa: E402
 from transformers import AutoTokenizer, AutoModelForCausalLM # noqa: F402
 
 def train(
-    fp16: bool = True,
-    bf16: bool = False, # Whether to use bf16 (preferred on A100's).
-    load_in_8bit: bool = True,
-    data_path: str = "./vi_merged.jsonl",
+    data_path: str = "./data/vi_merged.jsonl",
     base_model: str = "VietAI/gpt-neo-1.3B-vietnamese-news",
     output_dir: str = "./chat-gpt-neo-1.3B",
     # base_model: str = "VietAI/gpt-j-6B-vietnamese-news",
     # output_dir: str = "./chat-gpt-j-6B-1e",
+
     # training hyperparams
     batch_size: int = 128,
     micro_batch_size: int = 2,
@@ -37,21 +36,54 @@ def train(
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
     val_set_size: int = 200,
+
+    ## Select finetune method
+    finetune: str = "lora"
+
+    # prefix tuning hyperparams
+    num_virtual_tokens: int = 0,
+
     # lora hyperparams
     lora_r: int = 16,
     lora_alpha: int = 16,
     lora_dropout: float = 0.05,
-    lora_target_modules: List[str] = ["q_proj", "v_proj"], # gpt-3
-    # lora_target_modules: List[str] = ["c_proj"], # gpt-2
+    lora_target_modules: str = "q_proj k_proj v_proj", # gpt-3
+
     # llm hyperparams
+    bf16: bool = False, # whether to use bf16 (preferred on A100's).
+    load_in_8bit: bool = True, # 8 bit sẽ giảm vram nhưng chậm tốc độ huấn luyện đi nhiều lần
     group_by_length: bool = False,  # faster, but produces an odd training loss curve
     resume_from_checkpoint: str = None,  # either training checkpoint or final adapter
 ):
-    if isinstance(lora_target_modules, str):
-        lora_target_modules = lora_target_modules.split()
-
+    if finetune == "lora":
+        config = LoraConfig(
+            r=lora_r,
+            lora_alpha=lora_alpha,
+            target_modules=lora_target_modules.split(), # phân tách str thành list
+            lora_dropout=lora_dropout,
+            bias="none",
+            task_type="CAUSAL_LM",
+        )
+        print(
+            f"Training LoRA model with params:\n"
+            f"lora_r: {lora_r}\n"
+            f"lora_alpha: {lora_alpha}\n"
+            f"lora_dropout: {lora_dropout}\n"
+            f"lora_target_modules: {lora_target_modules}\n"
+        )
+    elif finetune == "prefix":
+        config = PrefixTuningConfig(
+            task_type=TaskType.CAUSAL_LM,
+            num_virtual_tokens=num_virtual_tokens
+        )
+        print(
+            f"Training Prefix-tuning model with params:\n"
+            f"num_virtual_tokens: {num_virtual_tokens}\n"
+        )
+    else:
+        assert False, "Hiện tại chỉ hỗ trợ lora và prefix tuning"
+    # In ra các tham số chung
     print(
-        f"Training LoRA model with params:\n"
         f"base_model: {base_model}\n"
         f"data_path: {data_path}\n"
         f"output_dir: {output_dir}\n"
@@ -61,21 +93,19 @@ def train(
         f"learning_rate: {learning_rate}\n"
         f"cutoff_len: {cutoff_len}\n"
         f"val_set_size: {val_set_size}\n"
-        f"lora_r: {lora_r}\n"
-        f"lora_alpha: {lora_alpha}\n"
-        f"lora_dropout: {lora_dropout}\n"
-        f"lora_target_modules: {lora_target_modules}\n"
         f"group_by_length: {group_by_length}\n"
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
     assert (
         base_model
     ), "Please specify a --base_model, e.g. --base_model='VietAI/gpt-j-6B-vietnamese-news'"
-    gradient_accumulation_steps = batch_size // micro_batch_size
 
+    gradient_accumulation_steps = batch_size // micro_batch_size
+    if load_in_8bit: bf16 = False # nếu load 8 bit thì buộc phải dùng bf16
     device_map = "auto"
     world_size = int(os.environ.get("WORLD_SIZE", 1))
     ddp = world_size != 1
+
     if ddp: # huấn luyện đa GPUs
         device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)}
         gradient_accumulation_steps = gradient_accumulation_steps // world_size
@@ -86,7 +116,9 @@ def train(
         torch_dtype=torch.float16,
         device_map=device_map,
     )
-    # print(model.state_dict)
+
+    if finetune == "lora":
+        print(model.state_dict) # in ra model state để lựa chọn cho lora
 
     tokenizer = AutoTokenizer.from_pretrained(base_model)
     tokenizer.pad_token_id = 0 # unk. we want this to be different from the eos token
@@ -116,15 +148,6 @@ def train(
         return tokenize(full_prompt)
 
     model = prepare_model_for_int8_training(model)
-
-    config = LoraConfig(
-        r=lora_r,
-        lora_alpha=lora_alpha,
-        target_modules=lora_target_modules,
-        lora_dropout=lora_dropout,
-        bias="none",
-        task_type="CAUSAL_LM",
-    )
     model = get_peft_model(model, config)
 
     if data_path.endswith(".jsonl"):
@@ -152,7 +175,8 @@ def train(
         else:
             print(f"Checkpoint {checkpoint_name} not found")
 
-    model.print_trainable_parameters()  # Be more transparent about the % of trainable params.
+    # Be more transparent about the % of trainable params.
+    model.print_trainable_parameters()
 
     if val_set_size > 0:
         train_val = data["train"].train_test_split(test_size=val_set_size, shuffle=True, seed=42)
@@ -164,8 +188,8 @@ def train(
 
 
     training_args = transformers.TrainingArguments(
-            fp16=fp16,
-            bf16=bf16,
+            fp16=(not bf16), # tốt cho GPUs đời cũ và training 8-bit
+            bf16=bf16, # tốt cho GPUs đời mới và không dùng 8-bit
             per_device_train_batch_size=micro_batch_size,
             gradient_accumulation_steps=gradient_accumulation_steps,
             warmup_steps=100,
@@ -182,7 +206,7 @@ def train(
             load_best_model_at_end=True if val_set_size > 0 else False,
             ddp_find_unused_parameters=False if ddp else None,
             group_by_length=group_by_length,
-            report_to="none",
+            report_to="none", # không log vào wandb (default option)
             run_name=None,
     )
 

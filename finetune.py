@@ -12,7 +12,8 @@ import torch
 import transformers
 from datasets import load_dataset
 
-from peft import (  # noqa: E402
+from peft import (
+    TaskType,
     LoraConfig,
     PrefixTuningConfig,
     get_peft_model,
@@ -20,7 +21,7 @@ from peft import (  # noqa: E402
     prepare_model_for_int8_training,
     set_peft_model_state_dict,
 )
-from transformers import AutoTokenizer, AutoModelForCausalLM # noqa: F402
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
 def train(
     data_path: str = "./data/vi_merged.jsonl",

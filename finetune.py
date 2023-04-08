@@ -45,7 +45,7 @@ def train(
     lora_r: int = 16,
     lora_alpha: int = 16,
     lora_dropout: float = 0.05,
-    lora_target_modules: str = "q_proj v_proj", # gpt-3
+    lora_target_modules: str = "q_proj k_proj v_proj", # gpt-3
 
     # llm hyperparams
     bf16: bool = False, # whether to use bf16 (preferred on A100's).
@@ -232,6 +232,7 @@ def train(
         model = torch.compile(model)
 
     trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+    model = model.to("cuda")
     model.save_pretrained(output_dir)
 
 

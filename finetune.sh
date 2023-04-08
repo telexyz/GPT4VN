@@ -17,7 +17,7 @@ python3 finetune.py --data_path 'data/sample.jsonl' --base_model 'VietAI/gpt-neo
 ## LoRA tuning
 python3 finetune.py --data_path 'data/sample.jsonl' --base_model 'VietAI/gpt-neo-1.3B-vietnamese-news' \
     --finetune_method 'lora' --lora_r 16 --lora_alpha 16 --output_dir 'out/lora_gpt-j-6B-1e' \
-    --batch_size=128 --micro_batch_size 2 --cutoff_len 512 --num_epochs 1 \
+    --batch_size=128 --micro_batch_size 2 --cutoff_len 256 --num_epochs 1 \
     --load_in_8bit False --bf16 True
 
 python3 finetune.py --data_path 'data/sample.jsonl' --base_model 'VietAI/gpt-j-6B-vietnamese-news' \

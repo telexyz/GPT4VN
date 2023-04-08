@@ -1,8 +1,8 @@
 # Chỉnh sửa từ https://github.com/tloen/alpaca-lora/blob/main/finetune.py; Apache License 2.0
 # CUDA_VISIBLE_DEVICES=0,3,1...
-import os, sys
-except: os.environ["CUDA_DEVICE"] = os.environ.get("CUDA_DEVICE") or "0"
+import os; os.environ["CUDA_DEVICE"] = os.environ.get("CUDA_DEVICE") or "0"
 
+import sys
 import fire
 import torch
 import transformers

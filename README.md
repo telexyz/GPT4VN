@@ -34,8 +34,8 @@ python3 chatbot.py
 
 ## Show me how
 ```sh
-cat vi*.jsonl > vi_merged.jsonl
-python3 finetune.py --data_path 'vi_merged.jsonl' --base_model 'VietAI/gpt-j-6B-vietnamese-news' \
+cat data/vi*.jsonl > data/vi_merged.jsonl
+python3 finetune.py --data_path 'data/vi_merged.jsonl' --base_model 'VietAI/gpt-j-6B-vietnamese-news' \
     --batch_size=128 --micro_batch_size 2 --cutoff_len 512 --num_epochs 1 --output_dir 'chat-gpt-j-6B-1e'
 ```
 Ví dụ trên huấn luyện chỉ dẫn `VietAI/gpt-j-6B-vietnamese-news` với 224 nghìn câu trên GPU 3060 12G vram hoàn tất 1 epoch trong khoảng hơn 21h.

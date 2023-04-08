@@ -38,7 +38,7 @@ def train(
     val_set_size: int = 200,
 
     ## Select finetune method
-    finetune: str = "lora",
+    finetune_method: str = "prefix",
 
     # prefix tuning hyperparams
     # Tham khảo https://github.com/huggingface/peft/blob/main/examples/causal_language_modeling/peft_prefix_tuning_clm.ipynb
@@ -72,7 +72,7 @@ def train(
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
 
-    if finetune == "lora":
+    if finetune_method == "lora":
         config = LoraConfig(
             r=lora_r,
             lora_alpha=lora_alpha,
@@ -88,7 +88,7 @@ def train(
             f"lora_dropout: {lora_dropout}\n"
             f"lora_target_modules: {lora_target_modules}\n"
         )
-    elif finetune == "prefix":
+    elif finetune_method == "prefix":
         config = PrefixTuningConfig(
             task_type=TaskType.CAUSAL_LM,
             num_virtual_tokens=num_virtual_tokens

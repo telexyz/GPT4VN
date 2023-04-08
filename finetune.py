@@ -57,6 +57,7 @@ def train(
     resume_from_checkpoint: str = None,  # either training checkpoint or final adapter
 ):
     # In ra các tham số chung
+    print("FINE-TUNE METHOD:", finetune_method)
     print(
         f"Mô hình được finetune và các tham số chung:\n"
         f"base_model: {base_model}\n"

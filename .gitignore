@@ -1,4 +1,4 @@
-vi_merged.jsonl
+data/vi_merged.jsonl
 .chatbot.py.swp
 wandb/
 chat-gpt*

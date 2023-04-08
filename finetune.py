@@ -41,7 +41,8 @@ def train(
     finetune: str = "lora",
 
     # prefix tuning hyperparams
-    num_virtual_tokens: int = 0,
+    # Tham khảo https://github.com/huggingface/peft/blob/main/examples/causal_language_modeling/peft_prefix_tuning_clm.ipynb
+    num_virtual_tokens: int = 32,
 
     # lora hyperparams
     lora_r: int = 16,

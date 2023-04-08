@@ -1,18 +1,15 @@
 # Chỉnh sửa từ https://github.com/tloen/alpaca-lora/blob/main/finetune.py; Apache License 2.0
-import os
-try: os.environ["CUDA_VISIBLE_DEVICES"]
-except: os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# CUDA_VISIBLE_DEVICES=0,3,1...
+import os; os.environ["CUDA_DEVICE"] = os.environ.get("CUDA_DEVICE") or "0"
 
-import os
 import sys
-from typing import List
-
 import fire
 import torch
 import transformers
 from datasets import load_dataset
 
-from peft import (  # noqa: E402
+from peft import (
+    TaskType,
     LoraConfig,
     PrefixTuningConfig,
     get_peft_model,
@@ -20,7 +17,7 @@ from peft import (  # noqa: E402
     prepare_model_for_int8_training,
     set_peft_model_state_dict,
 )
-from transformers import AutoTokenizer, AutoModelForCausalLM # noqa: F402
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
 def train(
     data_path: str = "./data/vi_merged.jsonl",
@@ -35,13 +32,14 @@ def train(
     num_epochs: int = 1,
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
-    val_set_size: int = 200,
+    val_set_size: int = 0,
 
     ## Select finetune method
-    finetune: str = "lora",
+    finetune_method: str = "", # lora prefix
 
     # prefix tuning hyperparams
-    num_virtual_tokens: int = 0,
+    # Tham khảo https://github.com/huggingface/peft/blob/main/examples/causal_language_modeling/peft_prefix_tuning_clm.ipynb
+    num_virtual_tokens: int = 32,
 
     # lora hyperparams
     lora_r: int = 16,
@@ -56,6 +54,7 @@ def train(
     resume_from_checkpoint: str = None,  # either training checkpoint or final adapter
 ):
     # In ra các tham số chung
+    print("\nFINE-TUNE METHOD:", finetune_method)
     print(
         f"Mô hình được finetune và các tham số chung:\n"
         f"base_model: {base_model}\n"
@@ -71,14 +70,14 @@ def train(
         f"resume_from_checkpoint: {resume_from_checkpoint}\n"
     )
 
-    if finetune == "lora":
+    if finetune_method == "lora":
         config = LoraConfig(
             r=lora_r,
             lora_alpha=lora_alpha,
             target_modules=lora_target_modules.split(), # phân tách str thành list
             lora_dropout=lora_dropout,
             bias="none",
-            task_type="CAUSAL_LM",
+            task_type=TaskType.CAUSAL_LM,
         )
         print(
             f"Training LoRA model with params:\n"
@@ -87,7 +86,7 @@ def train(
             f"lora_dropout: {lora_dropout}\n"
             f"lora_target_modules: {lora_target_modules}\n"
         )
-    elif finetune == "prefix":
+    elif finetune_method == "prefix":
         config = PrefixTuningConfig(
             task_type=TaskType.CAUSAL_LM,
             num_virtual_tokens=num_virtual_tokens
@@ -105,7 +104,7 @@ def train(
 
     gradient_accumulation_steps = batch_size // micro_batch_size
     if load_in_8bit: bf16 = False # nếu load 8 bit thì buộc phải dùng bf16
-    device_map = "auto"
+    device_map = {"": int(os.environ.get("CUDA_DEVICE") or 0)}
     world_size = int(os.environ.get("WORLD_SIZE", 1))
     ddp = world_size != 1
 
@@ -120,7 +119,7 @@ def train(
         device_map=device_map,
     )
 
-    if finetune == "lora":
+    if finetune_method == "lora":
         print(model.state_dict) # in ra model state để lựa chọn cho lora
 
     tokenizer = AutoTokenizer.from_pretrained(base_model)
@@ -209,7 +208,7 @@ def train(
             load_best_model_at_end=True if val_set_size > 0 else False,
             ddp_find_unused_parameters=False if ddp else None,
             group_by_length=group_by_length,
-            report_to="none", # không log vào wandb (default option)
+            report_to="none", # không sử dụng wandb (default option)
             run_name=None,
     )
 
@@ -233,6 +232,7 @@ def train(
         model = torch.compile(model)
 
     trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+    model = model.to("cuda")
     model.save_pretrained(output_dir)
 
 

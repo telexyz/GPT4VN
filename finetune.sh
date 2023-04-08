@@ -9,5 +9,5 @@
 
 ## 2/ Prefix tuning
 python3 finetune.py --data_path 'data/sample.jsonl' --base_model 'VietAI/gpt-neo-1.3B-vietnamese-news' \
-    --finetune 'prefix' --num_virtual_tokens 32  --output_dir 'out/gpt-j-1.3B-1e' \
+    --finetune_method 'prefix' --num_virtual_tokens 32  --output_dir 'out/gpt-j-1.3B-1e' \
     --batch_size=128 --micro_batch_size 2 --cutoff_len 512 --num_epochs 1

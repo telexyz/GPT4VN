@@ -1,11 +1,7 @@
 # Chỉnh sửa từ https://github.com/tloen/alpaca-lora/blob/main/finetune.py; Apache License 2.0
-import os
-try: os.environ["CUDA_VISIBLE_DEVICES"]
-except: os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
-import os
-import sys
-from typing import List
+# CUDA_VISIBLE_DEVICES=0,3,1...
+import os, sys
+except: os.environ["CUDA_DEVICE"] = os.environ.get("CUDA_DEVICE") or "0"
 
 import fire
 import torch
@@ -81,7 +77,7 @@ def train(
             target_modules=lora_target_modules.split(), # phân tách str thành list
             lora_dropout=lora_dropout,
             bias="none",
-            task_type="CAUSAL_LM",
+            task_type=TaskType.CAUSAL_LM,
         )
         print(
             f"Training LoRA model with params:\n"
@@ -108,7 +104,7 @@ def train(
 
     gradient_accumulation_steps = batch_size // micro_batch_size
     if load_in_8bit: bf16 = False # nếu load 8 bit thì buộc phải dùng bf16
-    device_map = "auto"
+    device_map = {"": int(os.environ.get("CUDA_DEVICE") or 0)}
     world_size = int(os.environ.get("WORLD_SIZE", 1))
     ddp = world_size != 1
 

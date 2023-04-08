@@ -1,4 +1,4 @@
-# Rút gọn từ https://github.com/tloen/alpaca-lora/blob/main/finetune.py
+# Chỉnh sửa từ https://github.com/tloen/alpaca-lora/blob/main/finetune.py; Apache License 2.0
 import os
 try: os.environ["CUDA_VISIBLE_DEVICES"]
 except: os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -38,7 +38,7 @@ def train(
     val_set_size: int = 200,
 
     ## Select finetune method
-    finetune: str = "lora"
+    finetune: str = "lora",
 
     # prefix tuning hyperparams
     num_virtual_tokens: int = 0,

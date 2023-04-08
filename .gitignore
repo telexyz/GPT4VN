@@ -6,3 +6,4 @@ nohup.out
 __pycache__/
 env
 js/
+out/

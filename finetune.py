@@ -32,7 +32,7 @@ def train(
     num_epochs: int = 1,
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
-    val_set_size: int = 200,
+    val_set_size: int = 0,
 
     ## Select finetune method
     finetune_method: str = "", # lora prefix
@@ -208,7 +208,7 @@ def train(
             load_best_model_at_end=True if val_set_size > 0 else False,
             ddp_find_unused_parameters=False if ddp else None,
             group_by_length=group_by_length,
-            report_to="none", # không log vào wandb (default option)
+            report_to="none", # không sử dụng wandb (default option)
             run_name=None,
     )
 

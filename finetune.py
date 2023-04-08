@@ -55,6 +55,22 @@ def train(
     group_by_length: bool = False,  # faster, but produces an odd training loss curve
     resume_from_checkpoint: str = None,  # either training checkpoint or final adapter
 ):
+    # In ra các tham số chung
+    print(
+        f"Mô hình được finetune và các tham số chung:\n"
+        f"base_model: {base_model}\n"
+        f"data_path: {data_path}\n"
+        f"output_dir: {output_dir}\n"
+        f"batch_size: {batch_size}\n"
+        f"micro_batch_size: {micro_batch_size}\n"
+        f"num_epochs: {num_epochs}\n"
+        f"learning_rate: {learning_rate}\n"
+        f"cutoff_len: {cutoff_len}\n"
+        f"val_set_size: {val_set_size}\n"
+        f"group_by_length: {group_by_length}\n"
+        f"resume_from_checkpoint: {resume_from_checkpoint}\n"
+    )
+
     if finetune == "lora":
         config = LoraConfig(
             r=lora_r,
@@ -82,20 +98,7 @@ def train(
         )
     else:
         assert False, "Hiện tại chỉ hỗ trợ lora và prefix tuning"
-    # In ra các tham số chung
-    print(
-        f"base_model: {base_model}\n"
-        f"data_path: {data_path}\n"
-        f"output_dir: {output_dir}\n"
-        f"batch_size: {batch_size}\n"
-        f"micro_batch_size: {micro_batch_size}\n"
-        f"num_epochs: {num_epochs}\n"
-        f"learning_rate: {learning_rate}\n"
-        f"cutoff_len: {cutoff_len}\n"
-        f"val_set_size: {val_set_size}\n"
-        f"group_by_length: {group_by_length}\n"
-        f"resume_from_checkpoint: {resume_from_checkpoint}\n"
-    )
+
     assert (
         base_model
     ), "Please specify a --base_model, e.g. --base_model='VietAI/gpt-j-6B-vietnamese-news'"

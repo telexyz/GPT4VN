@@ -121,7 +121,7 @@ def train(
         device_map=device_map,
     )
 
-    if finetune == "lora":
+    if finetune_method == "lora":
         print(model.state_dict) # in ra model state để lựa chọn cho lora
 
     tokenizer = AutoTokenizer.from_pretrained(base_model)

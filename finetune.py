@@ -35,7 +35,7 @@ def train(
     val_set_size: int = 0,
 
     ## Select finetune method
-    finetune_method: str = "", # lora prefix
+    finetune_method: str = "lora", # lora prefix
 
     # prefix tuning hyperparams
     # Tham khảo https://github.com/huggingface/peft/blob/main/examples/causal_language_modeling/peft_prefix_tuning_clm.ipynb

@@ -9,9 +9,10 @@
 
 ## Prefix tuning
 nohup python3 finetune.py --data_path 'data/vi_merged.jsonl' --base_model 'VietAI/gpt-neo-1.3B-vietnamese-news' \
-    --finetune_method 'prefix' --num_virtual_tokens 32  --output_dir 'out/prefix_gpt-neo-1.3B-2e' \
-    --batch_size=128 --micro_batch_size 2 --cutoff_len 384 --num_epochs 2 \
-    --load_in_8bit False --bf16 True --resume_from_checkpoint 'out/prefix_gpt-neo-1.3B-1e/checkpoint-1600' &
+    --finetune_method 'prefix' --num_virtual_tokens 64  --output_dir 'out/prefix_gpt-neo-1.3B-2e' \
+    --batch_size=128 --micro_batch_size 1 --cutoff_len 512 --num_epochs 2 \
+    --load_in_8bit False --bf16 True &
+    # --resume_from_checkpoint 'out/prefix_gpt-neo-1.3B-1e/checkpoint-1600' &
     # Vì model nhỏ nên không cần 8-bit và dùng bf16 để tận dụng tensor cores
 
 ## LoRA tuning

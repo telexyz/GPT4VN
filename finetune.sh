@@ -3,9 +3,9 @@
 ############################
 [ -f data/vi_merged.jsonl ] || cat data/vi*.jsonl > data/vi_merged.jsonl
 
-##########################################
-# Các kịch bản fine-tune với 3060 12G vram
-##########################################
+########################
+# Các kịch bản fine-tune
+########################
 
 ## Prefix tuning
 #nohup python3 finetune.py --data_path 'data/vi_merged.jsonl' --base_model 'VietAI/gpt-neo-1.3B-vietnamese-news' \

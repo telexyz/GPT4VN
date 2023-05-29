@@ -117,7 +117,7 @@ def train(
         load_in_8bit=load_in_8bit,
         torch_dtype=torch.float16,
         device_map=device_map,
-    ).cuda()
+    )
 
     if finetune_method == "lora":
         print(model.state_dict) # in ra model state để lựa chọn cho lora
